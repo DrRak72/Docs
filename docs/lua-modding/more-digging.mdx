@@ -6,17 +6,20 @@ sidebar_position: 7
 
 ### [Dig it uh oh oh, dig it](https://www.youtube.com/watch?v=GLsCR2RMBak)
 
-Alright Caveman, here's your task:  
->**Find out how to increase the Palbox build area with a script. Technically you can do this with PalGameSettings but I'm not talking about that, I'm talking about changing it in memory after the box has been placed.**
+Alright Caveman, here's your task:
 
-I'll give you some slight guidance: 
-- Get in a world, place down a palbox, start searching through live view for relevant **classes**. Remember, we want the box itself, that's going to be an object, which is an instance of a **class**. 
-- Once you think you might have an idea, right-click the search box and check `Instances only`. Make sure your search is narrowed down, and then try placing a palbox down while watching the object list. If you're on the right track, you'll see some new objects appear as they get created in game. 
-- Once you think you've found the relevant objects, I want you to create a script that uses `NotifyOnNewObject` to print `"found a base"` when a new base object is created. 
+> **Find out how to increase the Palbox build area with a script. Technically you can do this with PalGameSettings but I'm not talking about that, I'm talking about changing it in memory after the box has been placed.**
+
+I'll give you some slight guidance:
+
+- Get in a world, place down a palbox, start searching through live view for relevant **classes**. Remember, we want the box itself, that's going to be an object, which is an instance of a **class**.
+- Once you think you might have an idea, right-click the search box and check `Instances only`. Make sure your search is narrowed down, and then try placing a palbox down while watching the object list. If you're on the right track, you'll see some new objects appear as they get created in game.
+- Once you think you've found the relevant objects, I want you to create a script that uses `NotifyOnNewObject` to print `"found a base"` when a new base object is created.
 
 If you want to try and work it out on your own, you can start digging and come back if you get stuck. I'll leave a few hints here to help you get there without completely giving it away, but again, the more you can figure out on your own, the better off you'll be for your own mods!
 
 ### All On Your Own
+
 ---
 
 <details>
@@ -32,7 +35,6 @@ If you want to try and work it out on your own, you can start digging and come b
 >Alright so if you noticed `PalBoxBase` that might have given you the idea to search for `Base`. If you did, great! You were on the right track. If not, give that a shot and see what pops up. The next thing is to search through the `Base` results and see if there's anything relevant...
 
 </details>
-
 
 <details>
 <summary><b>Hint 3: Just tell me already..</b></summary>
@@ -74,20 +76,26 @@ Once you have a basic script that prints `found a base` for both existing bases 
 
 Now that we can detect the placement of new bases, lets dig into the parameters of the base model and try changing them. We'll start by sanity-testing in Live View and then move to the Lua implementation afterwards.
 
+### Instances in Live View
 
-### Instances in Live View 
 ---
-In Live View turn on `Instances only` and search for your `PalBaseCampModel`. Assuming you have one placed, you should find an object that is `PalBaseCampModel_<numbers>`. This is the actual model instance of the base camp you placed! 
+
+In Live View turn on `Instances only` and search for your `PalBaseCampModel`. Assuming you have one placed, you should find an object that is `PalBaseCampModel_<numbers>`. This is the actual model instance of the base camp you placed!
 
 Click on that and you should see a bunch of parameters pop up in the bottom. This lets you view the realtime params of the model, as well as _edit_ them. This is great for testing what exactly does what before you go through the trouble of doing it all programmatically. Normally you'd have to search through all the params to find what you want, but in this case I'll just tell you we want the `AreaRange` (its pretty obvious anyways).
 
 If you right-click that value in live view, you can click `Edit Value`. This lets you edit the actual param in memory. Lets try expanding our base to `5000.0`. Click apply and go out to the blue ring. You'll notice the ring hasn't actually changed <sup><sub>(don't get me started on this, that's a lesson for another day)</sub></sup> but if you go outside of it, the base info is still there, and you can still build base stuff!
+
 <br/>
+
 ![Live View, with the Base Camp Model selected and the dialogue box open from right-clicking the AreaRange value](./assets/live_view_area_range.png)
+
 <br/>
 
 ---
+
 # Back to the Lua
+
 Now, lets try to do that with a script so that we can change the range of all bases. Try your best to get there on your own, and come back _when_ you get stuck. Note the italics. Double-check your work by inspecting the object in LiveView...not everything is always as straightforward as you expect. Make sure to check the sanity check code before you move on!
 
 ---
@@ -98,8 +106,6 @@ Now, lets try to do that with a script so that we can change the range of all ba
 >The first parameter of the callback is the UObject itself. Grab that from the params like you would a RegisterHook and then try changing the value
 
 </details>
-
-
 
 <details>
 <summary><b>Hint 2: Pretty sure I have the right code, but the AreaRange isn't actually changing</b></summary>
@@ -125,17 +131,14 @@ end)
 
 </details>
 
-
 ---
 
 :::note
-**Why no `:get()` here?**  
+**Why no `:get()` here?**\
 With `NotifyOnNewObject`, we're getting the object itself, not a parameter. No `:get()` needed!
 :::
 
-
 If everything is set up right, you should be able to place a new base and it'll automatically update to the new setting. Nice job!
-
 
 :::warning
 Remember to untick `Instances only` when you're done looking at object instances!
