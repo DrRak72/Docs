@@ -18,7 +18,7 @@ If you cannot find it, go to your `Steam library -> Right Click -> Palworld -> M
 Click `OK` and go to FModel settings.
 Change your `Output Directory` to somewhere you'll find easily.
 In the `GAME` section, change `UE Versions` to `GAME_UE5_1`.
-In the `ADVANCED` section, check `Local Mapping File` and change `Mapping File Path` to the [Palworld Mapping File](https://github.com/KURAMAAA0/PalModding/raw/main/Assset%20Swap%20Guide/Mappings.usmap "Palworld mapping file") you downloaded earlier.
+In the `ADVANCED` section, check `Local Mapping File` and change `Mapping File Path` to the [Palworld Mapping File](https://github.com/KURAMAAA0/PalModding/raw/main/Assset%20Swap%20Guide/Mappings.usmap) you downloaded earlier.
 
 On the left side of the settings, click on the `Models` tab.
 Change your `Model Export Directory` to somewhere you'll find easily.
@@ -26,12 +26,12 @@ Change `Mesh Format` to `ActorX (psk / pskx)`
 Change `Texture Format` to `PNG`.
 Click `OK` and restart FModel.
 
-------------
-
+---
 
 You can now start exploring and exporting the game files freely!
 To find which file to export, go to one of these sections in the guide:
-- [Exporting and modifying 3D assets (Pals, items, etc..)](ExportingModifying3DAssets.md "Exporting and modifying 3D assets (Pals, items, etc..)")
-- [[WIP] Exporting and replacing 3D assets (Pals, items, etc..)](ExportingReplacing3DAssets.md)
-- [[WIP] Exporting and modifying 2D assets (Icons, HUD elements, images)](ExportingModifying2DAssets.md)
+
+- [Exporting and modifying 3D assets (Pals, items, etc..)](ExportingModifying3DAssets.md)
+- [\[WIP\] Exporting and replacing 3D assets (Pals, items, etc..)](ExportingReplacing3DAssets.md)
+- [\[WIP\] Exporting and modifying 2D assets (Icons, HUD elements, images)](ExportingModifying2DAssets.md)
 - Animations? Not sure if possible, didn't try yet. WIP.
