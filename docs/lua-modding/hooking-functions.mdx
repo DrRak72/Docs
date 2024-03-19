@@ -6,7 +6,7 @@ sidebar_position: 5
 
 In this tutorial, we will be hooking the function responsible for summoning a pal from your party.
 
-## Hooking functions 
+## Hooking functions
 
 To hook a function in ue4ss, we use the `RegisterHook` function as discussed in the previous tutorial.
 
@@ -18,8 +18,8 @@ RegisterHook(FunctionName, Callback)
 
 The parameters are as follows:
 
-* `FunctionName` - is the function name we could get from ue4ss LiveView
-* `Callback` - is the lua function we want to get called, when the hooked function finishes executing. This function can accept several parameters, which will be discussed later.
+- `FunctionName` - is the function name we could get from ue4ss LiveView
+- `Callback` - is the lua function we want to get called, when the hooked function finishes executing. This function can accept several parameters, which will be discussed later.
 
 :::note
 UE4SS hooks execute after the hooked function has finished executing. We have the ability to inspect the return value, and override it.
@@ -39,14 +39,14 @@ NotifyOnNewObject(ObjectPath, Callback)
 
 With the parameters being:
 
-* `ObjectPath` - the path to the object we wanna watch for creation, we could get this from ue4ss LiveView.
-* `Callback` - the function we want to get called, when the given obejct gets created. This function accepts a single parameter which is the instance of the created object.
+- `ObjectPath` - the path to the object we wanna watch for creation, we could get this from ue4ss LiveView.
+- `Callback` - the function we want to get called, when the given obejct gets created. This function accepts a single parameter which is the instance of the created object.
 
 ## Writing our first hook
 
 So for this simple example, we would want to write a snippet of code, which would scale down pals that we spawn from our party.
 
-First of all, all our pals that are part of our party are called `otomo` in this game, so we would like to find something related to that. 
+First of all, all our pals that are part of our party are called `otomo` in this game, so we would like to find something related to that.
 
 Aha! There's a `BP_OtomoPalHolderComponent`, which is responsible for storing your party pals, and spawning them when requested to.
 
@@ -82,18 +82,15 @@ If you're not seeing any messages from your mod appear, make sure you have `enab
 If there are still no messages, edit `mods.txt` to include your mod and enable it there.
 :::
 
-
 And now let's see the logs..
 
 ![First Hook Log](./assets/FirstHook.png)
 
 Yay, it works!
 
-
 :::note
 We register a hook for `ClientRestart` before trying to register for `NotifyOnNewObject`, because otherwise registration is not reliable and might not always get fired when the component gets created.
 :::
-
 
 ### Hooking the function
 
@@ -116,14 +113,11 @@ After doing so, you can press the `Restart All Mods` button in ue4ss.
 
 ![Restart All Mods](./assets/RestartAllMods.png)
 
-
 After reloading your mods, return to the title screen, and enter your world again. Now try throwing a pal from your party, and you should see this in your console:
-
 
 ![First Hook Works](./assets/FirstHookWorks.png)
 
-
-Nice! We can now get notified when someone spawns a pal from their party. Now let's do something useful with it. For the purposes of this tutorial, let's make the pal slightly smaller. 
+Nice! We can now get notified when someone spawns a pal from their party. Now let's do something useful with it. For the purposes of this tutorial, let's make the pal slightly smaller.
 
 For that we would require to get an instance of the pal's actor, but how can we do that? We only get the SlotID afterall.
 
@@ -160,7 +154,7 @@ Q: Why do we call `:get()` sometimes?
 A: Some parameters we get inside of our hooks are actually `RemoteUnrealParam`, usually those are instances of actors, objects, etc. So for us to get the inner value of them we need to call `:get()`
 :::
 
-
 So this code gets the component instance, gets a pal actor by the currently active slot index, and sets it's 3D actor scale to 60% of the original one. Let's hop into the game and check that!
 
 ![Cattiva being smaller as a result of the hook](./assets/FirstHookSmaller.jpg)
+
